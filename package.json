@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node /server/src/index.js"
+    "start": "node /home/marcelo/nasaproject/server/src/server.js"
   },
   "repository": {
     "type": "git",
