@@ -1,8 +1,11 @@
 const API_URL ='http://localhost:8000'
 
 async function httpGetPlanets() {
-  const response = await fetch(API_URL+'/planets')
-  return await response.json()
+  const response = await fetch(`${API_URL}/planets`);
+  console.log(response);
+  const responded = await response.json()
+  console.log(responded);
+  return responded;
   // TODO: Once API is ready.
   // Load planets and return as JSON.
 }

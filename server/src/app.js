@@ -4,7 +4,7 @@ const planetsRouter = require('./routes/planets/planets.router');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: '*'
 }));
 app.use(express.json());
 app.use(planetsRouter);
