@@ -3,7 +3,7 @@ const API_URL ='https://gold-expensive-bream.cyclic.app'
 async function httpGetPlanets() {
   const response = await fetch(`${API_URL}/planets`);
   const data = await response.json();
-  console.log("DATA: ", data);
+  console.log("PLANETS: ", data);
   return data
   // TODO: Once API is ready.
   // Load planets and return as JSON.
