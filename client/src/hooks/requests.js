@@ -1,4 +1,4 @@
-const API_URL ='http://localhost:8000'
+const API_URL ='https://gold-expensive-bream.cyclic.app'
 
 async function httpGetPlanets() {
   const response = await fetch(`${API_URL}/planets`);

@@ -12,7 +12,7 @@ function isHabitablePlanet(planet) {
 }
 
 async function getAllPlanets() {
-  return await planets.find({}, {
+  return await habitablePlanets.find({}, {
     '_id': 0, '__v': 0,
   });
 }
