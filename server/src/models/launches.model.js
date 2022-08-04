@@ -1,4 +1,4 @@
-launches = new Map();
+const launches = new Map();
 
 const launch = {
   flightNumber:100,
@@ -8,13 +8,14 @@ const launch = {
   destination: 'Kepler-442b',
   customer: ['ZTM', 'SpaceX'],
   upcoming: true,
-  sucess:true,
+  sucess:true
 }
 
 launches.set(launch.flightNumber, launch);
 
-function getAllLaunches(){
-  return  Array.from(launches.values());
+function getAllLaunches() {
+  console.log('getAllLaunches');
+  return Array.from(launches.values());
 }
 
 module.exports = {
