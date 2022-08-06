@@ -1,7 +1,7 @@
 const launches = new Map();
 
 const launch = {
-  flightNumber:100,
+  flightNumber: 100,
   mission: 'Kepler exploration something',
   rocket: 'Falcon 1',
   launchDate: new Date('2021-05-09'),
@@ -29,10 +29,21 @@ function addLaunch(launch) {
     sucess:true
   }));
   latestFlightNumber++;
+}
+
+function removeLaunch(launch) {
+  console.log('removeLaunch');
+  const abortedLaunch = launches.get(launch.flightNumber)
+  //return launches.delete(launch.flightNumber);
+  abortedLaunch.upcoming = false;
+  abortedLaunch.sucess = false;
+
+  return true;
 
 }
 
 module.exports = {
   getAllLaunches,
   addLaunch,
+  removeLaunch
 }

@@ -1,9 +1,25 @@
-const {getAllLaunches, addLaunch} = require('../../models/launches.model');
+const {getAllLaunches, addLaunch, removeLaunch} = require('../../models/launches.model');
 
 function httpGetAllLaunches(req, res) {
   console.log('ENTERED httpgetAllLaunches');
   const launches = getAllLaunches();
   return res.status(200).json(launches);
+}
+
+function httpAbortLaunch(req, res) {
+  const id = req.params.id;
+  const launchValues = getAllLaunches()
+  const launch = launchValues.find(launch => launch.flightNumber == id);
+  console.log('ENTERED httpAbortLaunch: ', id, launch);
+  if (!launch) {
+    return res.status(404).json({
+      message: 'Launch not found.'
+    });
+  }
+  if(!removeLaunch(launch)) return res.status(404).json({
+      message: 'error removing Launch'
+    });
+  return res.status(200).json({ message:`Aborted Launch mission ${launch.mission} id:${launch.flightNumber}.` });
 }
 
 function httpSubmitLaunch(req, res) {
@@ -29,4 +45,5 @@ function httpSubmitLaunch(req, res) {
 module.exports = {
   httpGetAllLaunches,
   httpSubmitLaunch,
+  httpAbortLaunch
 }
