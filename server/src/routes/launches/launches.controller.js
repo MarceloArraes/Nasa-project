@@ -39,7 +39,7 @@ function httpSubmitLaunch(req, res) {
     });
   }
   addLaunch(launch);
-  return res.status(200).json({launch, message:'Launch added'});
+  return res.status(201).json({launch, message:'Launch added'});
 }
 
 module.exports = {
