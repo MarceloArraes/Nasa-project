@@ -34,7 +34,7 @@ describe('Test POST /launch', () => {
     expect(response.body.launch).toMatchObject({
       ...LaunchDataWithoutDate,
       flightNumber: 101,
-      customer: ['MAT', 'SpaceX'],
+      customers: ['MAT', 'SpaceX'],
       sucess: true,
       upcoming: true,
       launchDate:"2024-05-05T00:00:00.000Z"

@@ -6,7 +6,7 @@ const launch = {
   rocket: 'Falcon 1',
   launchDate: new Date('2021-05-09'),
   target: 'Kepler-442b',
-  customer: ['ZTM', 'SpaceX'],
+  customes: ['ZTM', 'SpaceX'],
   upcoming: true,
   sucess:true
 }
@@ -24,7 +24,7 @@ function addLaunch(launch) {
 
   launches.set(latestFlightNumber + 1, Object.assign(launch, {
     flightNumber: latestFlightNumber + 1,
-    customer: ['MAT', 'SpaceX'],
+    customers: ['MAT', 'SpaceX'],
     upcoming: true,
     sucess:true
   }));
