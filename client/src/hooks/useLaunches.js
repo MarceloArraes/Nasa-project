@@ -34,8 +34,6 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
       target,
     });
 
-    console.log('httpSubmitLaunch ', response);
-    // TODO: Set success based on response.
     const success = response.ok;
     if (success) {
       getLaunches();

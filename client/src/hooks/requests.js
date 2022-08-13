@@ -7,12 +7,9 @@ async function httpGetPlanets() {
   const data = await response.json();
   console.log("PLANETS: ", data);
   return data
-  // TODO: Once API is ready.
-  // Load planets and return as JSON.
 }
 
 async function httpGetLaunches() {
-  console.log('ENTERED GET LAUNCHES');
   const response = await fetch(`${API_URL}/launches`);
   const data = await response.json();
   console.log("PLAUNCHES: ", data);
@@ -21,7 +18,6 @@ async function httpGetLaunches() {
 }
 
 async function httpSubmitLaunch(launch) {
-  console.log('ENTERED SUBMIT LAUNCH');
   try{
   return await fetch(`${API_URL}/launches`, {
     method: 'POST',
