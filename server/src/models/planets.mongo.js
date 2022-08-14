@@ -7,4 +7,6 @@ const planetsSchema = new mongoose.Schema({
   }
 });
 
-const planetsSchema2 = new mongoose.Schema({any: Object});
+const planetsSchema2 = new mongoose.Schema({ any: Object });
+
+module.exports = mongoose.model('Planet', planetsSchema);
