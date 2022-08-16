@@ -1,8 +1,8 @@
 /* const API_URL = process.env.is_dev ?
   'http://localhost:8000' :
   'https://gold-expensive-bream.cyclic.app' */
-const API_URL = 'http://localhost:8000'
-//const API_URL = 'https://gold-expensive-bream.cyclic.app'
+//const API_URL = 'http://localhost:8000'
+const API_URL = 'https://gold-expensive-bream.cyclic.app'
 
 async function httpGetPlanets() {
   const response = await fetch(`${API_URL}/planets`);
