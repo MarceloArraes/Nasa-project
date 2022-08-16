@@ -1,4 +1,5 @@
-//const launches = require('./launches.mongo')
+const launchesDatabase = require('./launches.mongo')
+const planets = require('./planets.mongo')
 const launches = new Map();
 
 const launch = {
@@ -6,7 +7,7 @@ const launch = {
   mission: 'Kepler exploration something',
   rocket: 'Falcon 1',
   launchDate: new Date('2021-05-09'),
-  target: 'Kepler-442b',
+  target: 'Kepler-442 b',
   customes: ['ZTM', 'SpaceX'],
   upcoming: true,
   sucess:true
@@ -15,14 +16,17 @@ const launch = {
 let latestFlightNumber = launch.flightNumber;
 launches.set(launch.flightNumber, launch);
 
-function getAllLaunches() {
+async function getAllLaunches() {
   console.log('getAllLaunches');
-  return Array.from(launches.values());
+  const launchesD = await launchesDatabase.find({}, {
+    '_id': 0, '__v': 0
+  });
+  return launchesD;
 }
 
 function addLaunch(launch) {
   console.log('addLaunch');
-
+  saveLaunch(launch);
   launches.set(latestFlightNumber + 1, Object.assign(launch, {
     flightNumber: latestFlightNumber + 1,
     customers: ['MAT', 'SpaceX'],
@@ -30,6 +34,26 @@ function addLaunch(launch) {
     sucess:true
   }));
   latestFlightNumber++;
+}
+
+async function saveLaunch(launch) {
+  const planet = await planets.findOne({
+    keplerName: launch.target
+  });
+  if (!planet) {
+    throw new Error('Planet not found');
+  }
+  try {
+    await launchesDatabase.updateOne({
+      flightNumber: launch.flightNumber,
+    }, launch, {
+      upsert: true
+    });
+  }
+  catch (err) {
+    console.log("could not sabe launch ", err);
+  }
+
 }
 
 function removeLaunch(launch) {
