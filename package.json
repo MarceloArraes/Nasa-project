@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/MarceloArraes/Nasa-project#readme",
   "dependencies": {
-    "morgan": "^1.10.0",
-    "mongoose": "^6.5.2"
+    "morgan": "^1.10.0"
   }
 }
