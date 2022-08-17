@@ -1,5 +1,8 @@
 const launchesDatabase = require('./launches.mongo')
 const planets = require('./planets.mongo')
+
+
+const DEFAULT_FLIGHT_NUMBER = 100;
 const launches = new Map();
 
 const launch = {
@@ -13,8 +16,17 @@ const launch = {
   sucess:true
 }
 
-let latestFlightNumber = launch.flightNumber;
 launches.set(launch.flightNumber, launch);
+
+async function getLatestFlightNumber() {
+  const latestLaunch = await launchesDatabase
+    .findOne({})
+    .sort('-flightNumber');
+  if (!latestLaunch) {
+    return DEFAULT_FLIGHT_NUMBER;
+  }
+  return latestLaunch.flightNumber;
+}
 
 async function getAllLaunches() {
   console.log('getAllLaunches');
@@ -24,16 +36,26 @@ async function getAllLaunches() {
   return launchesD;
 }
 
-function addLaunch(launch) {
+async function addLaunch(launch) {
   console.log('addLaunch');
-  saveLaunch(launch);
-  launches.set(latestFlightNumber + 1, Object.assign(launch, {
+  const latestFlightNumber = await getLatestFlightNumber() + 1;
+  const newLaunch = {
+    ...launch,
+    success: true,
+    upcoming: true,
+    customers: ['MAT', 'SpaceX'],
+    flightNumber: latestFlightNumber,
+  };
+  await saveLaunch(newLaunch);
+
+//local saving
+/*   launches.set(latestFlightNumber + 1, Object.assign(launch, {
     flightNumber: latestFlightNumber + 1,
     customers: ['MAT', 'SpaceX'],
     upcoming: true,
     sucess:true
   }));
-  latestFlightNumber++;
+  latestFlightNumber++; */
 }
 
 async function saveLaunch(launch) {

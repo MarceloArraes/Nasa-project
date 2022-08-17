@@ -7,9 +7,9 @@ async function httpGetAllLaunches(req, res) {
   return res.status(200).json(launches);
 }
 
-function httpAbortLaunch(req, res) {
+async function httpAbortLaunch(req, res) {
   const id = req.params.id;
-  const launchValues = getAllLaunches()
+  const launchValues = await getAllLaunches()
   const launch = launchValues.find(launch => launch.flightNumber == id);
   console.log('ENTERED httpAbortLaunch: ', id, launch);
   if (!launch) {
@@ -23,7 +23,7 @@ function httpAbortLaunch(req, res) {
   return res.status(200).json({ message:`Aborted Launch mission ${launch.mission} id:${launch.flightNumber}.` });
 }
 
-function httpSubmitLaunch(req, res) {
+async function httpSubmitLaunch(req, res) {
   console.log('ENTERED httpSubmitLaunch');
   console.log('req.body: ', req.body);
   const launch = req.body;
@@ -39,7 +39,7 @@ function httpSubmitLaunch(req, res) {
       message: 'Invalid launch date.'
     });
   }
-  addLaunch(launch);
+  await addLaunch(launch);
   return res.status(201).json({launch, message:'Launch added'});
 }
 
