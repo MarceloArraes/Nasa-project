@@ -1,15 +1,7 @@
-const http = require('http');
-const app = require('./app');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const {mongoConnect} = require('./services/mongo');
 
-const PORT = process.env.PORT || 8000;
-const {loadPlanetsData} = require('./models/planets.model');
-
-const server = http.createServer(app);
-
-/* mongoose.connection.once('connected', () => {
+mongoose.connection.once('connected', () => {
   console.log('Connected to MongoDB');
 }).on('error', (err) => {
   console.log('Error connecting to MongoDB: ', err);
@@ -29,17 +21,17 @@ const server = http.createServer(app);
   console.log('MongoDB fullsetup');
 }).on('all', (event) => {
   console.log('MongoDB all: ', event);
-}) */
+})
 
-
-async function startServer() {
-  await mongoConnect();
-
-  await loadPlanetsData();
-
-  server.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  } );
+async function mongoConnect() {
+  mongoose.connect(process.env.MONGODB_URI);
 }
 
-startServer();
+async function mongoDisconnect() {
+  await mongoose.disconnect();
+}
+
+module.exports = {
+  mongoConnect,
+  mongoDisconnect
+}
