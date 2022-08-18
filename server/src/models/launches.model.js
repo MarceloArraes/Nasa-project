@@ -3,7 +3,7 @@ const planets = require('./planets.mongo')
 
 
 const DEFAULT_FLIGHT_NUMBER = 100;
-const launches = new Map();
+/* const launches = new Map();
 
 const launch = {
   flightNumber: 100,
@@ -14,9 +14,9 @@ const launch = {
   customes: ['ZTM', 'SpaceX'],
   upcoming: true,
   sucess:true
-}
+} */
 
-launches.set(launch.flightNumber, launch);
+//launches.set(launch.flightNumber, launch);
 
 async function getLatestFlightNumber() {
   const latestLaunch = await launchesDatabase
@@ -78,14 +78,21 @@ async function saveLaunch(launch) {
 
 }
 
-function removeLaunch(launch) {
+async function removeLaunch(launch) {
   console.log('removeLaunch');
-  const abortedLaunch = launches.get(launch.flightNumber)
+/*   const abortedLaunch = launches.get(launch.flightNumber)
   //return launches.delete(launch.flightNumber);
   abortedLaunch.upcoming = false;
-  abortedLaunch.sucess = false;
+  abortedLaunch.sucess = false; */
 
-  return true;
+  const deleteLaunch = await launchesDatabase.updateOne({
+    flightNumber: launch.flightNumber
+  }, {
+    upcoming: false,
+    success: false
+  });
+  console.log('deleteLaunch', deleteLaunch);
+  return deleteLaunch.modifiedCount === 1;
 
 }
 
