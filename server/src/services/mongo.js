@@ -24,7 +24,7 @@ mongoose.connection.once('connected', () => {
 })
 
 async function mongoConnect() {
-  mongoose.connect(process.env.MONGODB_URI);
+  await mongoose.connect(process.env.MONGODB_URI);
 }
 
 async function mongoDisconnect() {
