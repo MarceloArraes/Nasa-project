@@ -25,7 +25,6 @@ const launchesSchema = new mongoose.Schema({
     type: String,
     //type: mongoose.ObjectId (references another collection)
     // almost simulating a foreign key from SQL. (so, not good)
-    required: true
   },
   customers: [String],
   upcoming: {
