@@ -97,7 +97,9 @@ async function getAllLaunches() {
   console.log('getAllLaunches');
   const launchesD = await launchesDatabase.find({}, {
     '_id': 0, '__v': 0
-  });
+  })
+    .skip(20)
+    .limit(50);
   return launchesD;
 }
 
