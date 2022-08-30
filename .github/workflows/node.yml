@@ -21,8 +21,10 @@ jobs:
         uses: supercharge/mongodb-github-action@1.8.0
         with:
           mongodb-version: ${{matrix.mongodb-version}}
+          mongodb-replica-set: test-rs
       - run: npm install
       - run: npm run build --prefix client
       - run: npm test
         env:
           CI: true
+          MONGODB_URI: mongodb://localhost/nasa
