@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/src/server.js",
     "start-dev": "node server/src/server.js is_dev=true",
-    "test": "npm test --prefix server && npm test --prefix client",
+    "test": "npm test --prefix server && npm test --prefix client --passWithNoTests",
     "deploy": "npm run build --prefix client && npm start --prefix server",
     "start-cluster": "npm run build --prefix client && npm run cluster --prefix server is_dev=true"
   },
