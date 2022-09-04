@@ -8,5 +8,5 @@ That deployment gave had some bumps along the road but overall it was worth it.
 
 I also used MongoDB and some API's from spaceX.
 
-To access it:
+To access it: http://15.229.3.231:8000/
 
